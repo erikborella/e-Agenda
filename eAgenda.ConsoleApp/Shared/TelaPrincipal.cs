@@ -1,11 +1,13 @@
-﻿using System;
+﻿using eAgenda.ConsoleApp.TarefaModule;
+using eAgenda.Controladores;
+using System;
 
 namespace eAgenda.ConsoleApp
 {
     public class TelaPrincipal : TelaBase
     {
-        //private readonly ControladorTarefa controladorTarefa;              
-        //private readonly TelaTarefa telaTarefa;
+        private readonly ControladorTarefa controladorTarefa;
+        private readonly TelaTarefa telaTarefa;
 
         //private readonly ControladorContato controladorContato;
         //private readonly TelaContato telaContato;
@@ -13,23 +15,16 @@ namespace eAgenda.ConsoleApp
 
         public TelaPrincipal() : base("Tela Principal")
         {
-            //controladorTarefa = new ControladorTarefa();          
-            //telaTarefa = new TelaTarefa(controladorTarefa);            
+            controladorTarefa = new ControladorTarefa();
+            telaTarefa = new TelaTarefa(controladorTarefa);
 
             PopularAplicacao();
         }
 
         private void PopularAplicacao()
         {
-            //Tarefa a1 = new Tarefa("Helena", "Alexandre", "321", "Colégio");
-            //controladorTarefa.InserirNovo(a1);
-
-            //Caixa caixa = new Caixa("Azul", "xua-654");
-            //controladorCaixa.InserirNovo(caixa);
-
-            //Revista r = new Revista("Superman", "Trilogia", 10, caixa);
-            //controladorRevista.InserirNovo(r);
-        }        
+            
+        }
 
         public TelaBase ObterTela()
         {
@@ -48,10 +43,10 @@ namespace eAgenda.ConsoleApp
                 opcao = Console.ReadLine();
 
                 if (opcao == "1")
-                { /*telaSelecionada = telaTarefa; */}
+                { telaSelecionada = telaTarefa; }
 
                 if (opcao == "2")
-                { /*telaSelecionada = telaCaixa; */}
+                { /*telaSelecionada = telaContato; */}
 
 
                 else if (opcao.Equals("s", StringComparison.OrdinalIgnoreCase))

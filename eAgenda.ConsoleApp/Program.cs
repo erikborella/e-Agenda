@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eAgenda.Dominio;
+using System;
 
 namespace eAgenda.ConsoleApp
 {
@@ -49,7 +46,7 @@ namespace eAgenda.ConsoleApp
                     else if (opcao == "4")
                         tela.ExcluirRegistro();
                 }
-               
+
                 Console.Clear();
             }
         }

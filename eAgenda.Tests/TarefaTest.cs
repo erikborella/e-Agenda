@@ -10,13 +10,13 @@ namespace eAgenda.Tests
         private Tarefa tarefa;
 
         public TarefaTest()
-        {            
+        {
         }
 
         [TestMethod]
         public void DataConclusaoDeveEstarEmBranco()
         {
-            tarefa = new Tarefa("Preparar aula", DateTime.Now);
+            tarefa = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Baixa);
 
             Assert.IsNull(tarefa.DataConclusao);
         }
@@ -24,15 +24,19 @@ namespace eAgenda.Tests
         [TestMethod]
         public void DeveRegistrarDataConclusao()
         {
-            Tarefa tarefa = new Tarefa("Preparar aula", DateTime.Now);
+            //arrange
+            tarefa = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Baixa);
 
+            //action
             tarefa.AtualizarPercentual(100);
 
+            //assert
+            Assert.IsNotNull(tarefa.DataConclusao);
             Assert.AreEqual(DateTime.Now.Date, tarefa.DataConclusao);
             Assert.AreEqual(100, tarefa.Percentual);
         }
 
-        
+
 
     }
 }

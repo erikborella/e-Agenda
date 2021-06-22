@@ -1,11 +1,9 @@
-﻿using System.ComponentModel;
-
-namespace eAgenda.ConsoleApp
+﻿namespace eAgenda.ConsoleApp
 {
     public enum TipoAcao
     {
         Inserindo, Editando
     }
 
-   
+
 }
