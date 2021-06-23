@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Description, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Description.1.0.0\lib\Description.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,8 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ContatoModule\Contato.cs" />
+    <Compile Include="ContatoModule\GrupoContato.cs" />
+    <Compile Include="EntidadeBase.cs" />
+    <Compile Include="TarefaModule\Prioridade.cs" />
+    <Compile Include="TarefaModule\PrioridadeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TarefaModule\StatusEnum.cs" />
+    <Compile Include="TarefaModule\Tarefa.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ContatoModule\ClassDiagram1.cd" />
+    <None Include="TarefaModule\ClassDiagram1.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

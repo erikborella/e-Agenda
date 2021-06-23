@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eAgenda.Controladores
+namespace eAgenda.Dominio.ContatoModule
 {
-    public class Class1
+    public class GrupoContato
     {
+        //public List<Contato> Contatos;
+        
     }
 }
