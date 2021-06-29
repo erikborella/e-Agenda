@@ -11,7 +11,7 @@ namespace eAgenda.Controladores.Shared
         public abstract bool Excluir(int id);
         public abstract List<T> SelecionarTodos();
 
-        protected Dictionary<string, object> AdicionarParametro(string campo, int valor)
+        protected Dictionary<string, object> AdicionarParametro(string campo, object valor)
         {
             return new Dictionary<string, object>() { { campo, valor } };
         }

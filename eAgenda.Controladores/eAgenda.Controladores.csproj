@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompromissoModule\ControladorCompromisso.cs" />
     <Compile Include="Shared\Controlador.cs" />
     <Compile Include="ContatoModule\ControladorContato.cs" />
     <Compile Include="TarefaModule\ControladorTarefa.cs" />
@@ -53,5 +54,6 @@
       <Name>eAgenda.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
