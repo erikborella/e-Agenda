@@ -49,9 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TarefaTest.cs" />
+    <Compile Include="ContatoModule\ControladorContatoTest.cs" />
+    <Compile Include="TarefaModule\TarefaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ControladorTarefaTest.cs" />
+    <Compile Include="TarefaModule\ControladorTarefaTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

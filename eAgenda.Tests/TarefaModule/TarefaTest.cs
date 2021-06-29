@@ -1,8 +1,8 @@
-﻿using eAgenda.Dominio;
+﻿using eAgenda.Dominio.TarefaModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace eAgenda.Tests
+namespace eAgenda.Tests.TarefaModule
 {
     [TestClass]
     public class TarefaTest
