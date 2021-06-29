@@ -1,16 +1,16 @@
-﻿using eAgenda.Controladores.TarefaModule;
-using eAgenda.Dominio.TarefaModule;
+﻿using eAgenda.Controladores;
+using eAgenda.Dominio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace eAgenda.Tests.TarefaModule
+namespace eAgenda.Tests
 {
     [TestClass]
     public class ControladorTarefaTest
     {
         public ControladorTarefaTest()
         {
-            LimparTabelas();
+            LimparTabelas();        
         }
 
         private void LimparTabelas()

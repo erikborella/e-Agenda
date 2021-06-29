@@ -1,9 +1,9 @@
-﻿using eAgenda.Controladores.Shared;
-using eAgenda.Dominio.Shared;
+﻿using eAgenda.Controladores;
+using eAgenda.Dominio;
 using System;
 using System.Collections.Generic;
 
-namespace eAgenda.ConsoleApp.Shared
+namespace eAgenda.ConsoleApp
 {
     public abstract class TelaCadastroBasico<T> : TelaBase, ICadastravel
         where T : EntidadeBase
@@ -182,5 +182,5 @@ namespace eAgenda.ConsoleApp.Shared
 
         public abstract T ObterRegistro(TipoAcao tipoAcao);
 
-    }
+    }   
 }

@@ -1,18 +1,16 @@
-﻿using eAgenda.ConsoleApp.ContatoModule;
-using eAgenda.ConsoleApp.TarefaModule;
-using eAgenda.Controladores.ContatoModule;
-using eAgenda.Controladores.TarefaModule;
+﻿using eAgenda.ConsoleApp.TarefaModule;
+using eAgenda.Controladores;
 using System;
 
-namespace eAgenda.ConsoleApp.Shared
+namespace eAgenda.ConsoleApp
 {
     public class TelaPrincipal : TelaBase
     {
         private readonly ControladorTarefa controladorTarefa;
         private readonly TelaTarefa telaTarefa;
 
-        private readonly ControladorContato controladorContato;
-        private readonly TelaContato telaContato;
+        //private readonly ControladorContato controladorContato;
+        //private readonly TelaContato telaContato;
 
 
         public TelaPrincipal() : base("Tela Principal")
@@ -20,15 +18,12 @@ namespace eAgenda.ConsoleApp.Shared
             controladorTarefa = new ControladorTarefa();
             telaTarefa = new TelaTarefa(controladorTarefa);
 
-            controladorContato = new ControladorContato();
-            telaContato = new TelaContato(controladorContato);
-
             PopularAplicacao();
         }
 
         private void PopularAplicacao()
         {
-
+            
         }
 
         public TelaBase ObterTela()
@@ -48,10 +43,10 @@ namespace eAgenda.ConsoleApp.Shared
                 opcao = Console.ReadLine();
 
                 if (opcao == "1")
-                    telaSelecionada = telaTarefa;
+                { telaSelecionada = telaTarefa; }
 
                 if (opcao == "2")
-                    telaSelecionada = telaContato;
+                { /*telaSelecionada = telaContato; */}
 
 
                 else if (opcao.Equals("s", StringComparison.OrdinalIgnoreCase))

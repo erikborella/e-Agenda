@@ -1,22 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace eAgenda.Dominio.ContatoModule
 {
     public class GrupoContato
     {
-        public GrupoContato(string campo)
-        {
-            Campo = campo;
-            Contatos = new List<Contato>();
-        }
-
-        public string Campo { get; set; }
-
-        public List<Contato> Contatos { get; set; }
-
-        public void AdicionarContato(Contato c)
-        {
-            Contatos.Add(c);
-        }
+        //public List<Contato> Contatos;
+        
     }
 }

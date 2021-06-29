@@ -1,7 +1,8 @@
-﻿using eAgenda.Dominio.Shared;
+﻿using eAgenda.Dominio;
+using System;
 using System.Collections.Generic;
 
-namespace eAgenda.Controladores.Shared
+namespace eAgenda.Controladores
 {
     public abstract class Controlador<T> where T : EntidadeBase
     {
@@ -11,10 +12,6 @@ namespace eAgenda.Controladores.Shared
         public abstract bool Excluir(int id);
         public abstract List<T> SelecionarTodos();
 
-        protected Dictionary<string, object> AdicionarParametro(string campo, int valor)
-        {
-            return new Dictionary<string, object>() { { campo, valor } };
-        }
-
+        
     }
 }

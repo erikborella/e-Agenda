@@ -44,13 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContatoModule\AgrupadorContato.cs" />
     <Compile Include="ContatoModule\Contato.cs" />
     <Compile Include="ContatoModule\GrupoContato.cs" />
-    <Compile Include="Shared\EntidadeBase.cs" />
+    <Compile Include="EntidadeBase.cs" />
     <Compile Include="TarefaModule\Prioridade.cs" />
     <Compile Include="TarefaModule\PrioridadeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TarefaModule\StatusEnum.cs" />
     <Compile Include="TarefaModule\Tarefa.cs" />
   </ItemGroup>
   <ItemGroup>

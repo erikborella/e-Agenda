@@ -1,10 +1,9 @@
-﻿using eAgenda.Controladores.Shared;
-using eAgenda.Dominio.TarefaModule;
+﻿using eAgenda.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace eAgenda.Controladores.TarefaModule
+namespace eAgenda.Controladores
 {
     public class ControladorTarefa : Controlador<Tarefa>
     {
@@ -132,7 +131,7 @@ namespace eAgenda.Controladores.TarefaModule
 
             return resultadoValidacao;
         }
-
+        
         public void AtualizarPercentual(int id, int novoPercentual)
         {
             Tarefa tarefa = SelecionarPorId(id);
@@ -141,7 +140,7 @@ namespace eAgenda.Controladores.TarefaModule
 
             Editar(id, tarefa);
         }
-
+        
         public override bool Excluir(int id)
         {
             try
@@ -165,7 +164,7 @@ namespace eAgenda.Controladores.TarefaModule
         {
             return Db.Get(sqlSelecionarTarefaPorId, ConverterEmTarefa, AdicionarParametro("ID", id));
         }
-
+       
         public override List<Tarefa> SelecionarTodos()
         {
             return Db.GetAll(sqlSelecionarTodasTarefas, ConverterEmTarefa);
@@ -214,6 +213,9 @@ namespace eAgenda.Controladores.TarefaModule
             return parametros;
         }
 
-
+        private static Dictionary<string, object> AdicionarParametro(string campo, int valor)
+        {
+            return new Dictionary<string, object>() { { campo, valor } };
+        }
     }
 }

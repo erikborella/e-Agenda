@@ -1,4 +1,4 @@
-﻿namespace eAgenda.ConsoleApp.Shared
+﻿namespace eAgenda.ConsoleApp
 {
     public interface ICadastravel
     {

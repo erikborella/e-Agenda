@@ -41,10 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Shared\Controlador.cs" />
-    <Compile Include="ContatoModule\ControladorContato.cs" />
-    <Compile Include="TarefaModule\ControladorTarefa.cs" />
-    <Compile Include="Shared\Db.cs" />
+    <Compile Include="Controlador.cs" />
+    <Compile Include="ControladorTarefa.cs" />
+    <Compile Include="Db.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

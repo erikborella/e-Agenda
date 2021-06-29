@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace eAgenda.Controladores.Shared
+namespace eAgenda.Controladores
 {
     public delegate T ConverterDelegate<T>(IDataReader reader);
 
@@ -108,7 +112,7 @@ namespace eAgenda.Controladores.Shared
 
             connection.Open();
 
-            int numberRows = Convert.ToInt32(command.ExecuteScalar());
+            int numberRows = Convert.ToInt32( command.ExecuteScalar() );
 
             connection.Close();
 
@@ -122,11 +126,13 @@ namespace eAgenda.Controladores.Shared
 
             foreach (var parameter in parameters)
             {
+                if (parameter.Value is string && string.IsNullOrEmpty((string)parameter.Value))
+                    parameters[parameter.Key] = null;
+
                 string name = parameter.Key;
+                object value = parameter.Value ?? DBNull.Value;
 
-                object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
-
-                SqlParameter dbParameter = new SqlParameter(name, value);
+                SqlParameter dbParameter = new SqlParameter(name, value);                
 
                 command.Parameters.Add(dbParameter);
             }
@@ -135,12 +141,6 @@ namespace eAgenda.Controladores.Shared
         private static string AppendSelectIdentity(this string sql)
         {
             return sql + ";SELECT SCOPE_IDENTITY()";
-        }
-
-        public static bool IsNullOrEmpty(this object value)
-        {
-            return (value is string && string.IsNullOrEmpty((string)value)) ||
-                    value == null;
         }
 
     }
