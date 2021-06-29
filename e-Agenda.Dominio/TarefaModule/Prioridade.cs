@@ -1,10 +1,10 @@
 ﻿using DescriptionLibrary;
 
-namespace eAgenda.Dominio
+namespace eAgenda.Dominio.TarefaModule
 {
     public class Prioridade
     {
-        private PrioridadeEnum prioridade;       
+        private PrioridadeEnum prioridade;
 
         public Prioridade(PrioridadeEnum prioridade)
         {

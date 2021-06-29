@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace eAgenda.ConsoleApp
+namespace eAgenda.ConsoleApp.Shared
 {
     public abstract class TelaBase
     {
-        private string titulo;
+        private readonly string titulo;
 
         public string Titulo { get { return titulo; } }
 
