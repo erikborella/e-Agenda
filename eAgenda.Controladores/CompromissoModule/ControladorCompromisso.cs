@@ -148,7 +148,7 @@ namespace eAgenda.Controladores.CompromissoModule
                 [ID] = @ID";
 
         #endregion
-        
+
         public override string InserirNovo(Compromisso registro)
         {
             string resultadoValidacao = registro.Validar();
@@ -173,7 +173,7 @@ namespace eAgenda.Controladores.CompromissoModule
 
             return resultadoValidacao;
         }
-      
+
         public override bool Excluir(int id)
         {
             try
@@ -196,7 +196,7 @@ namespace eAgenda.Controladores.CompromissoModule
         public Compromisso SelecionarPorId(int id)
         {
             return Db.Get(sqlSelecionarCompromissoPorId, ConverterEmCompromisso, AdicionarParametro("ID", id));
-        }      
+        }
 
         public override List<Compromisso> SelecionarTodos()
         {
@@ -238,7 +238,7 @@ namespace eAgenda.Controladores.CompromissoModule
             {
                 contato = new Contato(nome, email, telefone, cargo, empresa);
                 contato.Id = Convert.ToInt32(reader["ID_CONTATO"]);
-            }            
+            }
 
             Compromisso compromisso = new Compromisso(assunto, local, link, dataDoCompromisso, horaInicio, horaFim, contato);
             compromisso.Id = Convert.ToInt32(reader["ID"]);

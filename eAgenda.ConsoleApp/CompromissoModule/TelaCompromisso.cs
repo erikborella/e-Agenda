@@ -53,7 +53,7 @@ namespace eAgenda.ConsoleApp.CompromissoModule
 
             Console.Write("Digite a data inicial: ");
             var dataInicio = Convert.ToDateTime(Console.ReadLine());
-            
+
             Console.Write("Digite a data final: ");
             var dataFim = Convert.ToDateTime(Console.ReadLine());
 
@@ -95,7 +95,7 @@ namespace eAgenda.ConsoleApp.CompromissoModule
         {
             string configuracaoColunasTabela = "{0,-10} | {1,-20} | {2,-20} | {3,-15} | {4,-15} | {5,-15}";
 
-            MontarCabecalhoTabela(configuracaoColunasTabela, "Id", "Assunto", "Data", "Hora de início", "Hora de termino", "Contato");
+            MontarCabecalhoTabela(configuracaoColunasTabela, "Id", "Assunto", "Data", "Hora de início", "Hora de término", "Contato");
 
             foreach (Compromisso compromisso in registros)
             {
@@ -112,17 +112,17 @@ namespace eAgenda.ConsoleApp.CompromissoModule
             Console.Write("Digite a data do compromisso: ");
             DateTime data = Convert.ToDateTime(Console.ReadLine());
 
-            Console.Write("Digite a hora de inicio do compromisso: [12:00]");
+            Console.Write("Digite a hora de inicio do compromisso [12:00]: ");
             string[] strHoraInicio = Console.ReadLine().Split(':');
 
             TimeSpan horaInicio = new TimeSpan(int.Parse(strHoraInicio[0]), int.Parse(strHoraInicio[1]), 0);
 
-            Console.Write("Digite a hora de inicio do compromisso: [12:00]");
+            Console.Write("Digite a hora de inicio do compromisso [12:00]: ");
             string[] strHoraFim = Console.ReadLine().Split(':');
 
             TimeSpan horaFim = new TimeSpan(int.Parse(strHoraFim[0]), int.Parse(strHoraFim[1]), 0);
 
-            Console.WriteLine("Deseja marcar um contato neste compromisso? [S/N]");
+            Console.WriteLine("Deseja marcar um contato neste compromisso [S/N]? ");
 
             string adicionarContato = Console.ReadLine();
 

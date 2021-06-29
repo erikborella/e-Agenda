@@ -68,7 +68,7 @@ namespace eAgenda.Controladores.ContatoModule
 	                FROM
                         TBCONTATO ORDER BY CARGO;";
 
-       
+
 
         private const string sqlExisteContato =
             @"SELECT 
