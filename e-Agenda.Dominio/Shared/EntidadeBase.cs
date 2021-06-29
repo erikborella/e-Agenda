@@ -1,4 +1,4 @@
-﻿namespace eAgenda.Dominio
+﻿namespace eAgenda.Dominio.Shared
 {
     public abstract class EntidadeBase
     {

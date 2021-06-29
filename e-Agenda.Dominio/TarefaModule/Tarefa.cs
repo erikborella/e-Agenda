@@ -1,6 +1,7 @@
-﻿using System;
+﻿using eAgenda.Dominio.Shared;
+using System;
 
-namespace eAgenda.Dominio
+namespace eAgenda.Dominio.TarefaModule
 {
     public class Tarefa : EntidadeBase
     {
@@ -9,22 +10,14 @@ namespace eAgenda.Dominio
         public DateTime? DataConclusao;
         public int Percentual;
 
-        public Tarefa(string titulo, DateTime dataCriacao, PrioridadeEnum prioridade) 
+        public Tarefa(string titulo, DateTime dataCriacao, PrioridadeEnum prioridade)
         {
             Titulo = titulo;
             Prioridade = new Prioridade(prioridade);
             DataCriacao = dataCriacao;
         }
 
-        public Prioridade Prioridade { get; set; }        
-
-        public StatusEnum Status
-        {
-            get
-            {
-                return Percentual == 100 ? StatusEnum.Finalizada : StatusEnum.Pendente;
-            }
-        }
+        public Prioridade Prioridade { get; set; }
 
         public void AtualizarPercentual(int p)
         {
@@ -38,7 +31,18 @@ namespace eAgenda.Dominio
 
         public override string Validar()
         {
-            return "ESTA_VALIDO";                 
+            string resultadoValidacao = "";
+
+            if (string.IsNullOrEmpty(Titulo))
+                resultadoValidacao = "O campo título é obrigatório";
+
+            if (DataCriacao == DateTime.MinValue)
+                resultadoValidacao += "O campo título é obrigatório";
+
+            if (resultadoValidacao == "")
+                resultadoValidacao = "ESTA_VALIDO";
+
+            return resultadoValidacao;
         }
 
     }

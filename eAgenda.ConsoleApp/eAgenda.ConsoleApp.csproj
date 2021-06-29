@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContatoModule\TelaContato.cs" />
     <Compile Include="Shared\ICadastravel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,7 +53,7 @@
     <Compile Include="Shared\TipoAcao.cs" />
     <Compile Include="Shared\TipoMensagem.cs" />
     <Compile Include="Shared\TipoVisualizacao.cs" />
-    <Compile Include="TarefaModule\TarefaTela.cs" />
+    <Compile Include="TarefaModule\TelaTarefa.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,5 +68,6 @@
       <Name>eAgenda.Controladores</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

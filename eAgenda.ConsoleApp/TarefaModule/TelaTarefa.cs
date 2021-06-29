@@ -1,5 +1,6 @@
-﻿using eAgenda.Controladores;
-using eAgenda.Dominio;
+﻿using eAgenda.ConsoleApp.Shared;
+using eAgenda.Controladores.TarefaModule;
+using eAgenda.Dominio.TarefaModule;
 using System;
 using System.Collections.Generic;
 
@@ -46,7 +47,7 @@ namespace eAgenda.ConsoleApp.TarefaModule
 
                 ApresentarMensagem(MensagemDeEdicaoComSucesso(), TipoMensagem.Sucesso);
             }
-            else if(opcao == "2")
+            else if (opcao == "2")
             {
                 base.EditarRegistro();
             }
