@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ContatoModule\ClassDiagram1.cd" />
+    <None Include="Shared\DiagramaClasses.cd" />
     <None Include="TarefaModule\ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
