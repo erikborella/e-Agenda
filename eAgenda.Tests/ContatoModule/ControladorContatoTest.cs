@@ -114,6 +114,9 @@ namespace eAgenda.Tests.ContatoModule
             var c2 = new Contato("Maria Clara", "maria.clara@gmail.com", "111444777", "MC Ltda", "Dev");
             controlador.InserirNovo(c2);
 
+            var c5 = new Contato("Helena", "helena@gmail.com", "111444777", "MC Ltda", "Dev");
+            controlador.InserirNovo(c5);
+
             var c3 = new Contato("Arnaldo Antuenes", "arnaldo@gmail.com", "987654321", "ARN Ltda", "Musico");
             controlador.InserirNovo(c3);
 
@@ -121,13 +124,13 @@ namespace eAgenda.Tests.ContatoModule
             controlador.InserirNovo(c4);
 
             //action
-            var contatosAgrupados = controlador.SelecionarContatosAgrupados(c => c.Cargo);
+            List<GrupoContato> contatosAgrupados = controlador.SelecionarContatosAgrupados(c => c.Cargo);
 
             //assert
             contatosAgrupados.Should().HaveCount(2);
 
             contatosAgrupados[0].Campo.Should().Be("Dev");
-            contatosAgrupados[0].Contatos.Should().HaveCount(2);
+            contatosAgrupados[0].Contatos.Should().HaveCount(3);
 
             contatosAgrupados[1].Campo.Should().Be("Musico");
             contatosAgrupados[1].Contatos.Should().HaveCount(2);

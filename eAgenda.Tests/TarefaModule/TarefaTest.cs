@@ -76,7 +76,7 @@ namespace eAgenda.Tests.TarefaModule
         }
 
         [TestMethod]
-        public void DeveValidar_Titulo_DataCriacao()
+        public void DeveValidar_QuebraDeLinha_Titulo_DataCriacao()
         {
             //arrange
             var tarefa = new Tarefa("", DateTime.MinValue, PrioridadeEnum.Baixa);            

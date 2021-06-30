@@ -4,6 +4,7 @@ using eAgenda.Dominio.TarefaModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace eAgenda.Tests.TarefaModule
 {
@@ -14,12 +15,12 @@ namespace eAgenda.Tests.TarefaModule
 
         public ControladorTarefaTest()
         {
-            controlador = new ControladorTarefa();            
-            Db.Update("DELETE FROM [TBTAREFA]"); 
+            controlador = new ControladorTarefa();
+            Db.Update("DELETE FROM [TBTAREFA]");
         }
 
         [TestMethod]
-        public void DeveInserir_UmaTarefa()
+        public void DeveInserir_Tarefa()
         {
             //arrange
             Tarefa novaTarefa = new Tarefa("Corrigir provas", DateTime.Now, PrioridadeEnum.Alta);
@@ -28,26 +29,26 @@ namespace eAgenda.Tests.TarefaModule
             controlador.InserirNovo(novaTarefa);
 
             //assert
-            var tarefaEncontrada = controlador.SelecionarPorId(novaTarefa.Id);
+            Tarefa tarefaEncontrada = controlador.SelecionarPorId(novaTarefa.Id);            
             tarefaEncontrada.Should().Be(novaTarefa);
         }
 
         [TestMethod]
-        public void DeveAtualizar_UmaTarefa()
+        public void DeveEditar_UmaTarefa()
         {
             //arrange
             Tarefa tarefa = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Alta);            
             controlador.InserirNovo(tarefa);
 
-            Tarefa novaTarefa = new Tarefa("Corrigir provas", DateTime.Now, PrioridadeEnum.Alta);
+            Tarefa novaTarefa = new Tarefa("Corrigir provas", DateTime.Now, PrioridadeEnum.Baixa);
             novaTarefa.AtualizarPercentual(100, DateTime.Today);
 
             //action
             controlador.Editar(tarefa.Id, novaTarefa);
 
             //assert
-            Tarefa tarefaAtualizada = controlador.SelecionarPorId(tarefa.Id);
-            tarefaAtualizada.Should().Be(novaTarefa);
+            Tarefa tarefaEncontrada = controlador.SelecionarPorId(tarefa.Id);
+            tarefaEncontrada.Should().Be(novaTarefa);
         }
 
         [TestMethod]
@@ -85,12 +86,13 @@ namespace eAgenda.Tests.TarefaModule
             //arrange
             Tarefa t1 = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Baixa);
             controlador.InserirNovo(t1);
+            
+            Tarefa t3 = new Tarefa("Implementar Atividades", DateTime.Now, PrioridadeEnum.Alta);
+            controlador.InserirNovo(t3);
 
             Tarefa t2 = new Tarefa("Corrigir Provas", DateTime.Now, PrioridadeEnum.Normal);
             controlador.InserirNovo(t2);
-
-            Tarefa t3 = new Tarefa("Implementar Atividades", DateTime.Now, PrioridadeEnum.Alta);
-            controlador.InserirNovo(t3);
+            
 
             //action
             var tarefas = controlador.SelecionarTodos();
@@ -142,10 +144,10 @@ namespace eAgenda.Tests.TarefaModule
             controlador.AtualizarPercentual(t3, 100);
 
             //action
-            var tarefas = controlador.SelecionarTodasTarefasPendentes();
+            List<Tarefa> tarefas = controlador.SelecionarTodasTarefasPendentes();
 
             //assert
-            tarefas.Should().HaveCount(2);            
+            tarefas.Should().HaveCount(2);
             tarefas[0].Titulo.Should().Be("Corrigir Provas");
             tarefas[1].Titulo.Should().Be("Preparar aula");
         }

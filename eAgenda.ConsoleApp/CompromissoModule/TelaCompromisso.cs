@@ -57,7 +57,8 @@ namespace eAgenda.ConsoleApp.CompromissoModule
             Console.Write("Digite a data final: ");
             var dataFim = Convert.ToDateTime(Console.ReadLine());
 
-            List<Compromisso> compromissosFuturos = controladorCompromisso.SelecionarCompromissosFuturos(dataInicio, dataFim);
+            List<Compromisso> compromissosFuturos = 
+                controladorCompromisso.SelecionarCompromissosFuturos(dataInicio, dataFim);
 
             if (compromissosFuturos.Count == 0)
                 ApresentarMensagem("Nenhum compromisso futuro encontrado", TipoMensagem.Atencao);
@@ -69,7 +70,8 @@ namespace eAgenda.ConsoleApp.CompromissoModule
         {
             Console.WriteLine("\nCompromissos Passados:\n");
 
-            List<Compromisso> compromissosPassados = controladorCompromisso.SelecionarCompromissosPassados(DateTime.Now.Date);
+            List<Compromisso> compromissosPassados = 
+                controladorCompromisso.SelecionarCompromissosPassados(DateTime.Now.Date);
 
             if (compromissosPassados.Count == 0)
                 ApresentarMensagem("Nenhum compromisso passado encontrado", TipoMensagem.Atencao);
