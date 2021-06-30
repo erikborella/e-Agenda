@@ -3,19 +3,21 @@
   <Class Name="eAgenda.Dominio.CompromissoModule.Compromisso">
     <Position X="5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAEAAAAAAAAAAEAABAARAAAAQAQAAAAAA=</HashCode>
+      <HashCode>CAAAAAAAAAAAEAAAgAAAAAAEAABAAZAAAAQAQAAAAAA=</HashCode>
       <FileName>CompromissoModule\Compromisso.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Contato" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="eAgenda.Dominio.ContatoModule.Contato">
     <Position X="7.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IBAAAAAAgCAAIAAAAAAAAAAAAAAAAQABAAAAAAEAAAA=</HashCode>
+      <HashCode>IBAAAAAAgCAAIAAAgAAAAAAAAAAAAYABAAAAAAEAAAA=</HashCode>
       <FileName>ContatoModule\Contato.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="eAgenda.Dominio.ContatoModule.GrupoContato">
     <Position X="10.25" Y="3.5" Width="1.5" />
@@ -37,17 +39,18 @@
   <Class Name="eAgenda.Dominio.TarefaModule.Tarefa">
     <Position X="3" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AoAAAAAAAAAAAAAAgAAgAAAAAAAEAQAAAAAAAAAAABA=</HashCode>
+      <HashCode>AoAAAAAAAAAAAAAAgAAgAAAAAAAEAYAAAAAAAAAAABA=</HashCode>
       <FileName>TarefaModule\Tarefa.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Prioridade" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="eAgenda.Dominio.TarefaModule.Prioridade">
     <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAACAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAACAAAAAAAAEgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TarefaModule\Prioridade.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

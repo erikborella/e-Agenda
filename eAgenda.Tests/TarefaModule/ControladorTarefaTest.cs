@@ -1,5 +1,7 @@
-﻿using eAgenda.Controladores.TarefaModule;
+﻿using eAgenda.Controladores.Shared;
+using eAgenda.Controladores.TarefaModule;
 using eAgenda.Dominio.TarefaModule;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -8,71 +10,144 @@ namespace eAgenda.Tests.TarefaModule
     [TestClass]
     public class ControladorTarefaTest
     {
+        ControladorTarefa controlador = null;
+
         public ControladorTarefaTest()
         {
-            LimparTabelas();
-        }
-
-        private void LimparTabelas()
-        {
-            throw new NotImplementedException();
+            controlador = new ControladorTarefa();            
+            Db.Update("DELETE FROM [TBTAREFA]"); 
         }
 
         [TestMethod]
-        public void DeveInserirUmaTarefa()
+        public void DeveInserir_UmaTarefa()
+        {
+            //arrange
+            Tarefa novaTarefa = new Tarefa("Corrigir provas", DateTime.Now, PrioridadeEnum.Alta);
+
+            //action
+            controlador.InserirNovo(novaTarefa);
+
+            //assert
+            var tarefaEncontrada = controlador.SelecionarPorId(novaTarefa.Id);
+            tarefaEncontrada.Should().Be(novaTarefa);
+        }
+
+        [TestMethod]
+        public void DeveAtualizar_UmaTarefa()
+        {
+            //arrange
+            Tarefa tarefa = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Alta);            
+            controlador.InserirNovo(tarefa);
+
+            Tarefa novaTarefa = new Tarefa("Corrigir provas", DateTime.Now, PrioridadeEnum.Alta);
+            novaTarefa.AtualizarPercentual(100, DateTime.Today);
+
+            //action
+            controlador.Editar(tarefa.Id, novaTarefa);
+
+            //assert
+            Tarefa tarefaAtualizada = controlador.SelecionarPorId(tarefa.Id);
+            tarefaAtualizada.Should().Be(novaTarefa);
+        }
+
+        [TestMethod]
+        public void DeveExcluir_UmaTarefa()
+        {
+            //arrange            
+            Tarefa tarefa = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Alta);
+            controlador.InserirNovo(tarefa);
+
+            //action            
+            controlador.Excluir(tarefa.Id);
+
+            //assert
+            Tarefa tarefaEncontrada = controlador.SelecionarPorId(tarefa.Id);
+            tarefaEncontrada.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void DeveSelecionar_Tarefa_PorId()
         {
             //arrange
             Tarefa tarefa = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Alta);
-
-            ControladorTarefa controlador = new ControladorTarefa();
-
-            //action
             controlador.InserirNovo(tarefa);
 
+            //action
+            Tarefa tarefaEncontrada = controlador.SelecionarPorId(tarefa.Id);
+
             //assert
-            Assert.IsTrue(tarefa.Id > 0);
-
-            int id = tarefa.Id;
-
-            Tarefa tarefaEncontrada = controlador.SelecionarPorId(id);
-            Assert.AreEqual("Preparar aula", tarefaEncontrada.Titulo);
-            Assert.AreEqual("Prioridade Alta", tarefaEncontrada.Prioridade);
+            tarefaEncontrada.Should().Be(tarefa);
         }
 
         [TestMethod]
-        public void DeveAtualizarUmaTarefa()
+        public void DeveSelecionar_TodasTarefas_OrdenadasPorPrioridade()
         {
             //arrange
-            Tarefa tarefa1 = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Alta);
-            ControladorTarefa controlador = new ControladorTarefa();
-            controlador.InserirNovo(tarefa1);
-            int id = tarefa1.Id;
+            Tarefa t1 = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Baixa);
+            controlador.InserirNovo(t1);
+
+            Tarefa t2 = new Tarefa("Corrigir Provas", DateTime.Now, PrioridadeEnum.Normal);
+            controlador.InserirNovo(t2);
+
+            Tarefa t3 = new Tarefa("Implementar Atividades", DateTime.Now, PrioridadeEnum.Alta);
+            controlador.InserirNovo(t3);
 
             //action
-            Tarefa tarefa2 = new Tarefa("Corrigir Provas", DateTime.Now, PrioridadeEnum.Baixa);
-            controlador.Editar(id, tarefa2);
+            var tarefas = controlador.SelecionarTodos();
 
             //assert
-            Tarefa tarefaAtualizada = controlador.SelecionarPorId(id);
-            Assert.AreEqual("Corrigir Provas", tarefaAtualizada.Titulo);
-            Assert.AreEqual("Prioridade Baixa", tarefaAtualizada.Prioridade.ToString());
+            tarefas.Should().HaveCount(3);
+            tarefas[0].Titulo.Should().Be("Implementar Atividades");
+            tarefas[1].Titulo.Should().Be("Corrigir Provas");
+            tarefas[2].Titulo.Should().Be("Preparar aula");
         }
 
         [TestMethod]
-        public void DeveExcluirUmaTarefa()
+        public void DeveSelecionar_TarefasConcluidas_OrdenadasPorPrioridade()
         {
             //arrange
-            Tarefa tarefa1 = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Alta);
-            ControladorTarefa controlador = new ControladorTarefa();
-            controlador.InserirNovo(tarefa1);
-            int id = tarefa1.Id;
+            Tarefa t1 = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Baixa);
+            controlador.InserirNovo(t1);
 
-            //action            
-            controlador.Excluir(id);
+            Tarefa t2 = new Tarefa("Corrigir Provas", DateTime.Now, PrioridadeEnum.Normal);
+            controlador.InserirNovo(t2);
+
+            Tarefa t3 = new Tarefa("Implementar Atividades", DateTime.Now, PrioridadeEnum.Alta);
+            controlador.InserirNovo(t3);
+
+            controlador.AtualizarPercentual(t2, 100);
+            controlador.AtualizarPercentual(t3, 100);
+
+            //action
+            var tarefas = controlador.SelecionarTodasTarefasConcluidas();
 
             //assert
-            Tarefa tarefaEncontrada = controlador.SelecionarPorId(id);
-            Assert.IsNull(tarefaEncontrada);
+            tarefas.Should().HaveCount(2);
+            tarefas[0].Titulo.Should().Be("Implementar Atividades");
+            tarefas[1].Titulo.Should().Be("Corrigir Provas");
+        }
+
+        [TestMethod]
+        public void DeveSelecionar_TarefasPendentes_OrdenadasPorPrioridade()
+        {
+            //arrange
+            Tarefa t1 = new Tarefa("Preparar aula", DateTime.Now, PrioridadeEnum.Baixa);
+            controlador.InserirNovo(t1);
+
+            Tarefa t2 = new Tarefa("Corrigir Provas", DateTime.Now, PrioridadeEnum.Normal);
+            controlador.InserirNovo(t2);
+
+            Tarefa t3 = new Tarefa("Implementar Atividades", DateTime.Now, PrioridadeEnum.Alta);
+            controlador.InserirNovo(t3);
+            controlador.AtualizarPercentual(t3, 100);
+
+            //action
+            var tarefas = controlador.SelecionarTodasTarefasPendentes();
+
+            //assert
+            tarefas.Should().HaveCount(2);            
+            tarefas[0].Titulo.Should().Be("Corrigir Provas");
+            tarefas[1].Titulo.Should().Be("Preparar aula");
         }
     }
 }

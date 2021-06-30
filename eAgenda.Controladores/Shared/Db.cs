@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace eAgenda.Controladores.Shared
 {
@@ -13,7 +14,7 @@ namespace eAgenda.Controladores.Shared
 
         static Db()
         {
-            connectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=DBeAgenda;Integrated Security=True;Pooling=False";
+            connectionString = ConfigurationManager.ConnectionStrings["DBeAgenda"].ConnectionString;            
         }
 
         public static int Insert(string sql, Dictionary<string, object> parameters)
@@ -33,7 +34,7 @@ namespace eAgenda.Controladores.Shared
             return id;
         }
 
-        public static void Update(string sql, Dictionary<string, object> parameters)
+        public static void Update(string sql, Dictionary<string, object> parameters = null)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 

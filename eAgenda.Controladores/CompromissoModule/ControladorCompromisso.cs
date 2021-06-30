@@ -17,7 +17,7 @@ namespace eAgenda.Controladores.CompromissoModule
                     [DATA], 
                     [ASSUNTO],
                     [HORAINICIO],                    
-                    [HORAFIM],                                                           
+                    [HORATERMINO],                                                           
                     [ID_CONTATO],
                     [LINK]            
                 )
@@ -27,7 +27,7 @@ namespace eAgenda.Controladores.CompromissoModule
                     @DATA,
                     @ASSUNTO,
                     @HORAINICIO,
-                    @HORAFIM,
+                    @HORATERMINO,
                     @ID_CONTATO,
                     @LINK
                 )";
@@ -39,7 +39,7 @@ namespace eAgenda.Controladores.CompromissoModule
                     [DATA] = @DATA, 
                     [ASSUNTO] = @ASSUNTO,
                     [HORAINICIO] = @HORAINICIO, 
-                    [HORAFIM] = @HORAFIM,
+                    [HORATERMINO] = @HORATERMINO,
                     [ID_CONTATO] =@ID_CONTATO,
                     [LINK] = @LINK
 
@@ -56,7 +56,7 @@ namespace eAgenda.Controladores.CompromissoModule
                 CP.[ASSUNTO],
                 CP.[LOCAL],             
                 CP.[HORAINICIO],                    
-                CP.[HORAFIM],                                
+                CP.[HORATERMINO],                                
                 CP.[ID_CONTATO],
                 CP.[LINK],
                 CT.[NOME],       
@@ -77,7 +77,7 @@ namespace eAgenda.Controladores.CompromissoModule
                 CP.[ASSUNTO],
                 CP.[LOCAL],             
                 CP.[HORAINICIO],                    
-                CP.[HORAFIM],                                
+                CP.[HORATERMINO],                                
                 CP.[ID_CONTATO],
                 CP.[LINK],
                 CT.[NOME],       
@@ -91,7 +91,7 @@ namespace eAgenda.Controladores.CompromissoModule
             ON
                 CT.ID = CP.ID_CONTATO
             WHERE 
-                [ID] = @ID";
+                CP.[ID] = @ID";
 
         private const string sqlSelecionarTodosCompromissosPassados =
            @"SELECT 
@@ -100,7 +100,7 @@ namespace eAgenda.Controladores.CompromissoModule
                 CP.[ASSUNTO],
                 CP.[LOCAL],             
                 CP.[HORAINICIO],                    
-                CP.[HORAFIM],                                
+                CP.[HORATERMINO],                                
                 CP.[ID_CONTATO],
                 CP.[LINK],
                 CT.[NOME],       
@@ -123,7 +123,7 @@ namespace eAgenda.Controladores.CompromissoModule
                 CP.[ASSUNTO],
                 CP.[LOCAL],             
                 CP.[HORAINICIO],                    
-                CP.[HORAFIM],                                
+                CP.[HORATERMINO],                                
                 CP.[ID_CONTATO],
                 CP.[LINK],
                 CT.[NOME],       
@@ -193,7 +193,7 @@ namespace eAgenda.Controladores.CompromissoModule
             return Db.Exists(sqlExisteCompromisso, AdicionarParametro("ID", id));
         }
 
-        public Compromisso SelecionarPorId(int id)
+        public override Compromisso SelecionarPorId(int id)
         {
             return Db.Get(sqlSelecionarCompromissoPorId, ConverterEmCompromisso, AdicionarParametro("ID", id));
         }
@@ -225,7 +225,7 @@ namespace eAgenda.Controladores.CompromissoModule
             var link = Convert.ToString(reader["LINK"]);
             var dataDoCompromisso = Convert.ToDateTime(reader["DATA"]);
             var horaInicio = TimeSpan.FromTicks(Convert.ToInt64(reader["HORAINICIO"]));
-            var horaFim = TimeSpan.FromTicks(Convert.ToInt64(reader["HORAFIM"]));
+            var horaTermino = TimeSpan.FromTicks(Convert.ToInt64(reader["HORATERMINO"]));
 
             var email = Convert.ToString(reader["EMAIL"]);
             var nome = Convert.ToString(reader["NOME"]);
@@ -236,11 +236,11 @@ namespace eAgenda.Controladores.CompromissoModule
             Contato contato = null;
             if (reader["ID_CONTATO"] != DBNull.Value)
             {
-                contato = new Contato(nome, email, telefone, cargo, empresa);
+                contato = new Contato(nome, email, telefone, empresa, cargo);
                 contato.Id = Convert.ToInt32(reader["ID_CONTATO"]);
             }
 
-            Compromisso compromisso = new Compromisso(assunto, local, link, dataDoCompromisso, horaInicio, horaFim, contato);
+            Compromisso compromisso = new Compromisso(assunto, local, link, dataDoCompromisso, horaInicio, horaTermino, contato);
             compromisso.Id = Convert.ToInt32(reader["ID"]);
 
             return compromisso;
@@ -256,7 +256,7 @@ namespace eAgenda.Controladores.CompromissoModule
             parametros.Add("LINK", compromisso.Link);
             parametros.Add("DATA", compromisso.Data);
             parametros.Add("HORAINICIO", compromisso.HoraInicio.Ticks);
-            parametros.Add("HORAFIM", compromisso.HoraFim.Ticks);
+            parametros.Add("HORATERMINO", compromisso.HoraTermino.Ticks);
             parametros.Add("ID_CONTATO", compromisso.Contato?.Id);
 
             return parametros;

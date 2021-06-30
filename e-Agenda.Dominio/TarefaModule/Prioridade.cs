@@ -2,7 +2,7 @@
 
 namespace eAgenda.Dominio.TarefaModule
 {
-    public class Prioridade
+    public struct Prioridade
     {
         private PrioridadeEnum prioridade;
 
@@ -19,10 +19,23 @@ namespace eAgenda.Dominio.TarefaModule
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Prioridade prioridade &&
+                   this.prioridade == prioridade.prioridade;
+        }
+
+        public override int GetHashCode()
+        {
+            return -1267430178 + prioridade.GetHashCode();
+        }
+
         public override string ToString()
         {
             return prioridade.Description();
         }
+
+
 
     }
 }

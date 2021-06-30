@@ -100,7 +100,7 @@ namespace eAgenda.ConsoleApp.CompromissoModule
             foreach (Compromisso compromisso in registros)
             {
                 Console.WriteLine(configuracaoColunasTabela,
-                    compromisso.Id, compromisso.Assunto, compromisso.Data.ToShortDateString(), compromisso.HoraInicio, compromisso.HoraFim, compromisso.Contato?.Nome);
+                    compromisso.Id, compromisso.Assunto, compromisso.Data.ToShortDateString(), compromisso.HoraInicio, compromisso.HoraTermino, compromisso.Contato?.Nome);
             }
         }
 

@@ -108,6 +108,7 @@ namespace eAgenda.Controladores.TarefaModule
 
         #endregion
 
+
         public override string InserirNovo(Tarefa registro)
         {
             string resultadoValidacao = registro.Validar();
@@ -133,15 +134,6 @@ namespace eAgenda.Controladores.TarefaModule
             return resultadoValidacao;
         }
 
-        public void AtualizarPercentual(int id, int novoPercentual)
-        {
-            Tarefa tarefa = SelecionarPorId(id);
-
-            tarefa.AtualizarPercentual(novoPercentual);
-
-            Editar(id, tarefa);
-        }
-
         public override bool Excluir(int id)
         {
             try
@@ -155,22 +147,37 @@ namespace eAgenda.Controladores.TarefaModule
 
             return true;
         }
-
+        
         public override bool Existe(int id)
         {
             return Db.Exists(sqlExisteTarefa, AdicionarParametro("ID", id));
         }
-
-        public Tarefa SelecionarPorId(int id)
-        {
-            return Db.Get(sqlSelecionarTarefaPorId, ConverterEmTarefa, AdicionarParametro("ID", id));
-        }
-
+        
         public override List<Tarefa> SelecionarTodos()
         {
             return Db.GetAll(sqlSelecionarTodasTarefas, ConverterEmTarefa);
         }
+        
+        public override Tarefa SelecionarPorId(int id)
+        {
+            return Db.Get(sqlSelecionarTarefaPorId, ConverterEmTarefa, AdicionarParametro("ID", id));
+        }
 
+
+        public void AtualizarPercentual(int id, int novoPercentual)
+        {
+            Tarefa tarefa = SelecionarPorId(id);
+
+            AtualizarPercentual(tarefa, novoPercentual);
+        }
+
+        public void AtualizarPercentual(Tarefa tarefa, int novoPercentual)
+        {
+            tarefa.AtualizarPercentual(novoPercentual, DateTime.Today);
+
+            Editar(tarefa.Id, tarefa);
+        }
+                      
         public List<Tarefa> SelecionarTodasTarefasConcluidas()
         {
             return Db.GetAll(sqlSelecionarTodasTarefasConcluidas, ConverterEmTarefa);
@@ -190,12 +197,13 @@ namespace eAgenda.Controladores.TarefaModule
 
             Tarefa tarefa = new Tarefa(titulo, dataCriacao, (PrioridadeEnum)prioridade);
 
-            tarefa.Id = Convert.ToInt32(reader["ID"]);
+            DateTime dataConclusao = DateTime.MinValue;
 
-            if (reader["DATACONCLUSAO"] != DBNull.Value)
-                tarefa.DataConclusao = Convert.ToDateTime(reader["DATACONCLUSAO"]);
+            if (reader["DATACONCLUSAO"] != DBNull.Value)            
+                dataConclusao = Convert.ToDateTime(reader["DATACONCLUSAO"]);            
 
-            tarefa.AtualizarPercentual(percentual);
+            tarefa.Id = Convert.ToInt32(reader["ID"]);                            
+            tarefa.AtualizarPercentual(percentual, dataConclusao);
 
             return tarefa;
         }

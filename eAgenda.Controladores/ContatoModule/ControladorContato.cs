@@ -68,8 +68,6 @@ namespace eAgenda.Controladores.ContatoModule
 	                FROM
                         TBCONTATO ORDER BY CARGO;";
 
-
-
         private const string sqlExisteContato =
             @"SELECT 
                 COUNT(*) 
@@ -122,7 +120,7 @@ namespace eAgenda.Controladores.ContatoModule
             return Db.Exists(sqlExisteContato, AdicionarParametro("ID", id));
         }
 
-        public Contato SelecionarPorId(int id)
+        public override Contato SelecionarPorId(int id)
         {
             return Db.Get(sqlSelecionarContatoPorId, ConverterEmContato, AdicionarParametro("ID", id));
         }
@@ -162,7 +160,7 @@ namespace eAgenda.Controladores.ContatoModule
             string cargo = Convert.ToString(reader["CARGO"]);
             string empresa = Convert.ToString(reader["EMPRESA"]);
 
-            Contato contato = new Contato(nome, email, telefone, cargo, empresa);
+            Contato contato = new Contato(nome, email, telefone, empresa, cargo);
 
             contato.Id = id;
 
