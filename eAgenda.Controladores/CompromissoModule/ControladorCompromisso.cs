@@ -94,7 +94,7 @@ namespace eAgenda.Controladores.CompromissoModule
                 CP.[ID] = @ID";
 
         private const string sqlSelecionarTodosCompromissosPassados =
-           @"SELECT 
+            @"SELECT 
                 CP.[ID],       
                 CP.[DATA],
                 CP.[ASSUNTO],
@@ -114,7 +114,7 @@ namespace eAgenda.Controladores.CompromissoModule
             ON
                 CT.ID = CP.ID_CONTATO
             WHERE 
-                CP.[DATA] < @DATA";
+                CP.[DATA] <= @DATA";
 
         private const string sqlSelecionarTodosCompromissosFuturos =
             @"SELECT 
@@ -147,6 +147,18 @@ namespace eAgenda.Controladores.CompromissoModule
             WHERE 
                 [ID] = @ID";
 
+        private const string sqlVerificarHorarioOcupado =
+            @"SELECT
+	            COUNT(*)
+            FROM 
+	            TBCOMPROMISSO
+            WHERE 
+                [DATA] = @DATA 
+            AND 
+                @HORA_INICIO_DESEJADO BETWEEN HORAINICIO AND HORATERMINO 
+            OR 
+                @HORA_TERMINO_DESEJADO BETWEEN HORAINICIO AND HORATERMINO";
+
         #endregion
 
         public override string InserirNovo(Compromisso registro)
@@ -155,7 +167,12 @@ namespace eAgenda.Controladores.CompromissoModule
 
             if (resultadoValidacao == "ESTA_VALIDO")
             {
-                registro.Id = Db.Insert(sqlInserirCompromisso, ObtemParametrosCompromisso(registro));
+                bool horarioOcupado = VerificarHorarioOcupado(registro.Data, registro.HoraInicio, registro.HoraTermino);
+
+                if (horarioOcupado)
+                    resultadoValidacao = "Nesta data e horário já tem um compromisso agendado";
+                else
+                    registro.Id = Db.Insert(sqlInserirCompromisso, ObtemParametrosCompromisso(registro));
             }
 
             return resultadoValidacao;
@@ -216,6 +233,21 @@ namespace eAgenda.Controladores.CompromissoModule
         public List<Compromisso> SelecionarCompromissosPassados(DateTime data)
         {
             return Db.GetAll(sqlSelecionarTodosCompromissosPassados, ConverterEmCompromisso, AdicionarParametro("DATA", data));
+        }
+
+        /// <summary>
+        /// //https://stackoverflow.com/questions/8503825/what-is-the-correct-sql-type-to-store-a-net-timespan-with-values-240000
+        /// </summary>
+        public bool VerificarHorarioOcupado(DateTime data, TimeSpan horaInicioDesejado, TimeSpan horaTerminoDesejado)
+        {
+            var parametros = new Dictionary<string, object>();
+
+            parametros.Add("DATA", data);
+
+            parametros.Add("HORA_INICIO_DESEJADO", horaInicioDesejado.Ticks);
+            parametros.Add("HORA_TERMINO_DESEJADO", horaTerminoDesejado.Ticks);
+
+            return Db.Exists(sqlVerificarHorarioOcupado, parametros);
         }
 
         private Compromisso ConverterEmCompromisso(IDataReader reader)

@@ -34,7 +34,7 @@ namespace eAgenda.ConsoleApp.CompromissoModule
             if (tipo == TipoVisualizacao.VisualizandoTela)
                 ConfigurarTela(SubtituloDeVisualizacao());
 
-            string opcao = ObterOpcao();
+            string opcao = ObterOpcao();            
 
             if (opcao.Equals("1"))
                 VisualizarCompromissosFuturos();

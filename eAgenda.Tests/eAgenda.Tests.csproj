@@ -55,6 +55,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompromissoModule\CompromissoTest.cs" />
+    <Compile Include="CompromissoModule\ControladorCompromissoTest.cs" />
     <Compile Include="ContatoModule\ContatoTest.cs" />
     <Compile Include="ContatoModule\ControladorContatoTest.cs" />
     <Compile Include="TarefaModule\TarefaTest.cs" />

@@ -14,7 +14,7 @@ namespace eAgenda.Controladores.Shared
 
         static Db()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["DBeAgenda"].ConnectionString;            
+            connectionString = ConfigurationManager.ConnectionStrings["DBeAgenda"].ConnectionString;
         }
 
         public static int Insert(string sql, Dictionary<string, object> parameters)
@@ -114,7 +114,7 @@ namespace eAgenda.Controladores.Shared
             connection.Close();
 
             return numberRows > 0;
-        }
+        }        
 
         private static void SetParameters(this SqlCommand command, Dictionary<string, object> parameters)
         {
