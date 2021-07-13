@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>eAgenda.Database</Name>
+    <Name>eAgenda.Database.SqlServer</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{3b8b8b5f-4424-4de8-8d16-77b8b9030cf0}</ProjectGuid>
