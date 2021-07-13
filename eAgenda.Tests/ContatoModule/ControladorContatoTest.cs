@@ -10,6 +10,7 @@ using System.Text;
 namespace eAgenda.Tests.ContatoModule
 {
     [TestClass]
+    [TestCategory("Controladores")]
     public class ControladorContatoTest
     {
         ControladorContato controlador = null;

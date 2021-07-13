@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.SQLite;
+using System.Data.Common;
 
 namespace eAgenda.Controladores.Shared
 {
@@ -10,43 +12,62 @@ namespace eAgenda.Controladores.Shared
 
     public static class Db
     {
+        private static readonly string bancoDeDados;
         private static readonly string connectionString = "";
+        private static readonly string nomeProvider;
+        private static readonly DbProviderFactory fabricaProvedor;
 
         static Db()
-        {
-            connectionString = ConfigurationManager.ConnectionStrings["DBeAgenda"].ConnectionString;
+        {            
+            bancoDeDados = ConfigurationManager.AppSettings["bancoDeDados"];
+
+            connectionString = ConfigurationManager.ConnectionStrings[bancoDeDados].ConnectionString;
+            
+            nomeProvider = ConfigurationManager.ConnectionStrings[bancoDeDados].ProviderName;
+
+            fabricaProvedor = DbProviderFactories.GetFactory(nomeProvider);
         }
 
         public static int Insert(string sql, Dictionary<string, object> parameters)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            using (IDbConnection connection = fabricaProvedor.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
 
-            SqlCommand command = new SqlCommand(sql.AppendSelectIdentity(), connection);
+                using (IDbCommand command = fabricaProvedor.CreateCommand()) 
+                {
+                    command.CommandText = sql.AppendSelectIdentity();
+                    command.Connection = connection;
+                    command.SetParameters(parameters);
 
-            command.SetParameters(parameters);
+                    connection.Open();
 
-            connection.Open();
+                    int id = Convert.ToInt32(command.ExecuteScalar());
 
-            int id = Convert.ToInt32(command.ExecuteScalar());
-
-            connection.Close();
-
-            return id;
+                    return id;
+                }
+            }
         }
 
         public static void Update(string sql, Dictionary<string, object> parameters = null)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            using (IDbConnection connection = fabricaProvedor.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
 
-            SqlCommand command = new SqlCommand(sql, connection);
+                using (IDbCommand command = fabricaProvedor.CreateCommand())
+                {
+                    command.CommandText = sql;
 
-            command.SetParameters(parameters);
+                    command.Connection = connection;
 
-            connection.Open();
+                    command.SetParameters(parameters);
 
-            command.ExecuteNonQuery();
+                    connection.Open();
 
-            connection.Close();
+                    command.ExecuteNonQuery();             
+                }
+            }
         }
 
         public static void Delete(string sql, Dictionary<string, object> parameters)
@@ -56,67 +77,90 @@ namespace eAgenda.Controladores.Shared
 
         public static List<T> GetAll<T>(string sql, ConverterDelegate<T> convert, Dictionary<string, object> parameters = null)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-
-            SqlCommand command = new SqlCommand(sql, connection);
-
-            command.SetParameters(parameters);
-
-            connection.Open();
-
-            var list = new List<T>();
-
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
+           using (IDbConnection connection = fabricaProvedor.CreateConnection())
             {
-                var obj = convert(reader);
-                list.Add(obj);
-            }
+                connection.ConnectionString = connectionString;
 
-            connection.Close();
-            return list;
+                using (IDbCommand command = fabricaProvedor.CreateCommand())
+                {
+                    command.CommandText = sql;
+
+                    command.Connection = connection;
+
+                    command.SetParameters(parameters);
+
+                    connection.Open();
+
+                    var list = new List<T>();
+
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var obj = convert(reader);
+                            list.Add(obj);
+                        }
+
+                        return list;
+                    }
+                }
+            }
         }
 
         public static T Get<T>(string sql, ConverterDelegate<T> convert, Dictionary<string, object> parameters)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            using (IDbConnection connection = fabricaProvedor.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
 
-            SqlCommand command = new SqlCommand(sql, connection);
+                using (IDbCommand command = fabricaProvedor.CreateCommand())
+                {
+                    command.CommandText = sql;
 
-            command.SetParameters(parameters);
+                    command.Connection = connection;
 
-            connection.Open();
+                    command.SetParameters(parameters);
 
-            T t = default;
+                    connection.Open();
 
-            var reader = command.ExecuteReader();
+                    T t = default;
 
-            if (reader.Read())
-                t = convert(reader);
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
 
-            connection.Close();
-            return t;
+                        if (reader.Read())
+                            t = convert(reader);
+
+                        return t;
+                    }
+                }
+            }
         }
 
         public static bool Exists(string sql, Dictionary<string, object> parameters)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            using (IDbConnection connection = fabricaProvedor.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
 
-            SqlCommand command = new SqlCommand(sql, connection);
+                using (IDbCommand command = fabricaProvedor.CreateCommand())
+                {
+                    command.CommandText = sql;
 
-            command.SetParameters(parameters);
+                    command.Connection = connection;
 
-            connection.Open();
+                    command.SetParameters(parameters);
 
-            int numberRows = Convert.ToInt32(command.ExecuteScalar());
+                    connection.Open();
 
-            connection.Close();
+                    int numberRows = Convert.ToInt32(command.ExecuteScalar());
 
-            return numberRows > 0;
+                    return numberRows > 0;
+                }
+            }
         }        
 
-        private static void SetParameters(this SqlCommand command, Dictionary<string, object> parameters)
+        private static void SetParameters(this IDbCommand command, Dictionary<string, object> parameters)
         {
             if (parameters == null || parameters.Count == 0)
                 return;
@@ -127,7 +171,10 @@ namespace eAgenda.Controladores.Shared
 
                 object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
 
-                SqlParameter dbParameter = new SqlParameter(name, value);
+                IDataParameter dbParameter = command.CreateParameter();
+
+                dbParameter.ParameterName = name;
+                dbParameter.Value = value;
 
                 command.Parameters.Add(dbParameter);
             }
@@ -135,7 +182,14 @@ namespace eAgenda.Controladores.Shared
 
         private static string AppendSelectIdentity(this string sql)
         {
-            return sql + ";SELECT SCOPE_IDENTITY()";
+            switch (nomeProvider)
+            {
+                case "System.Data.SqlClient": return sql + ";SELECT SCOPE_IDENTITY()";
+
+                case "System.Data.SQLite": return sql + ";SELECT LAST_INSERT_ROWID()";
+
+                default: return sql;
+            }
         }
 
         public static bool IsNullOrEmpty(this object value)

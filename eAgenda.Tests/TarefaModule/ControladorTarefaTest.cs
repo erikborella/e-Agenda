@@ -9,6 +9,7 @@ using System.Collections.Generic;
 namespace eAgenda.Tests.TarefaModule
 {
     [TestClass]
+    [TestCategory("Controladores")]
     public class ControladorTarefaTest
     {
         ControladorTarefa controlador = null;

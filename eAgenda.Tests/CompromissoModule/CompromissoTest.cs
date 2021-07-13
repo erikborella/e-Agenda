@@ -7,6 +7,7 @@ using System;
 namespace eAgenda.Tests.CompromissoModule
 {
     [TestClass]
+    [TestCategory("Dominio")]
     public class CompromissoTest
     {
         [TestMethod]

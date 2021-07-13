@@ -6,6 +6,7 @@ using FluentAssertions;
 namespace eAgenda.Tests.TarefaModule
 {
     [TestClass]
+    [TestCategory("Dominio")]
     public class TarefaTest
     {
         [TestMethod]

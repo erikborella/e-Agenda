@@ -11,6 +11,7 @@ using System.Collections.Generic;
 namespace eAgenda.Tests.CompromissoModule
 {
     [TestClass]
+    [TestCategory("Controladores")]
     public class ControladorCompromissoTest
     {
         ControladorCompromisso controladorCompromisso = null;

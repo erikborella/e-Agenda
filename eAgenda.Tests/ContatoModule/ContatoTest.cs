@@ -6,6 +6,7 @@ using System;
 namespace eAgenda.Tests.ContatoModule
 {
     [TestClass]
+    [TestCategory("Dominio")]
     public class ContatoTest
     {
         [TestMethod]
