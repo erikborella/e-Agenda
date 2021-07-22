@@ -16,5 +16,7 @@ namespace eAgenda.WindowsApp.Shared
         void ExcluirRegistro();
 
         UserControl ObterTabela();
+
+        void FiltrarRegistros();
     }
 }

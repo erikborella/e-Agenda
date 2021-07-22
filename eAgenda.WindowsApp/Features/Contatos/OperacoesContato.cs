@@ -33,5 +33,10 @@ namespace eAgenda.WindowsApp.Features.Contato
         {
             return new TabelaContatoControl();
         }
+
+        public void FiltrarRegistros()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

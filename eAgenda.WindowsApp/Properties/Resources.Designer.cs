@@ -63,6 +63,16 @@ namespace eAgenda.WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Filter_Configuration {
+            get {
+                object obj = ResourceManager.GetObject("Filter_Configuration", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Symbol_Add {
             get {
                 object obj = ResourceManager.GetObject("Symbol_Add", resourceCulture);

@@ -9,13 +9,9 @@ namespace eAgenda.WindowsApp.Features.Tarefas
 {
     public class ConfiguracaoTarefaToolBox : IConfiguracaoToolBox
     {
-        
         public string TipoCadastro
         {
-            get
-            {
-                return "Cadastro de Tarefas";
-            }
+            get { return "Cadastro de Tarefas"; }
         }
 
         public string ToolTipAdicionar

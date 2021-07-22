@@ -33,7 +33,19 @@ namespace eAgenda.WindowsApp.Features.Tarefas
         {
             get { return tarefa; }
 
-            set { tarefa = value; }
+            set 
+            { 
+                tarefa = value;
+
+                txtId.Text = tarefa.Id.ToString();
+                txtTitulo.Text = tarefa.Titulo;
+                dateDataCriacao.Text = tarefa.DataCriacao.ToShortDateString();
+
+                cmbPrioridade.SelectedIndex = tarefa.Prioridade.Chave;
+                txtPercentual.Value = tarefa.Percentual;
+                dateDataConclusao.Text = tarefa.DataConclusao.HasValue ? 
+                    tarefa.DataConclusao.Value.ToShortDateString() : "";
+            }
         }
 
 
@@ -62,7 +74,22 @@ namespace eAgenda.WindowsApp.Features.Tarefas
             tarefa = new Tarefa(titulo, dataCriacao, prioridade);
 
             tarefa.AtualizarPercentual((int)txtPercentual.Value, dataConclusao);
-          
+
+            string resultadoValidacao = tarefa.Validar();
+
+            if (resultadoValidacao != "ESTA_VALIDO")
+            {
+                string primeiroErro = new StringReader(resultadoValidacao).ReadLine();
+
+                TelaPrincipalForm.Instancia.AtualizarRodape(primeiroErro);
+
+                DialogResult = DialogResult.None;
+            }
+        }
+
+        private void TelaTarefaForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TelaPrincipalForm.Instancia.AtualizarRodape("");
         }
     }
 }

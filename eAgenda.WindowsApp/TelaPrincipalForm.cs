@@ -17,24 +17,41 @@ namespace eAgenda.WindowsApp
     public partial class TelaPrincipalForm : Form
     {
         private ICadastravel operacoes;
+
+        public static TelaPrincipalForm Instancia;
+
         public TelaPrincipalForm()
         {
             InitializeComponent();
+
+            Instancia = this;
+        }
+
+        public  void AtualizarRodape(string mensagem)
+        {
+            labelRodape.Text = mensagem;
         }
 
         private void menuItemTarefas_Click(object sender, EventArgs e)
         {
-            ConfigurarToolBox(new ConfiguracaoTarefaToolBox());
+            ConfiguracaoTarefaToolBox configuracao = new ConfiguracaoTarefaToolBox();
 
+            ConfigurarToolBox(configuracao);
+
+            AtualizarRodape(configuracao.TipoCadastro);
 
             operacoes = new OperacoesTarefa(new ControladorTarefa());
 
-            ConfigurarPainelRegistros();
+            ConfigurarPainelRegistros();            
         }
 
         private void menuItemContato_Click(object sender, EventArgs e)
         {
-            ConfigurarToolBox(new ConfiguracaoContatoToolBox());
+            ConfiguracaoContatoToolBox configuracao = new ConfiguracaoContatoToolBox();
+
+            ConfigurarToolBox(configuracao);
+
+            AtualizarRodape(configuracao.TipoCadastro);
 
             operacoes = new OperacoesContato();
 
@@ -61,10 +78,20 @@ namespace eAgenda.WindowsApp
             operacoes.ExcluirRegistro();
         }
 
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            operacoes.FiltrarRegistros();
+        }
+
         private void ConfigurarPainelRegistros()
         {
+            UserControl tabela = operacoes.ObterTabela();
+
+            tabela.Dock = DockStyle.Fill;
+
             panelRegistros.Controls.Clear();
-            panelRegistros.Controls.Add(operacoes.ObterTabela());
+
+            panelRegistros.Controls.Add(tabela);
         }
 
         private void ConfigurarToolBox(IConfiguracaoToolBox configuracao)
@@ -75,5 +102,7 @@ namespace eAgenda.WindowsApp
             btnEditar.ToolTipText = configuracao.ToolTipEditar;
             btnExcluir.ToolTipText = configuracao.ToolTipExcluir;
         }
+
+       
     }
 }

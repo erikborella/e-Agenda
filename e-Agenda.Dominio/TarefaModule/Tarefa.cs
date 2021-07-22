@@ -50,6 +50,11 @@ namespace eAgenda.Dominio.TarefaModule
                    DataCriacao == other.DataCriacao;
         }
 
+        public bool EstaConcluida()
+        {
+            return Percentual == 100;
+        }
+
         public override int GetHashCode()
         {
             int hashCode = -1307587567;

@@ -199,6 +199,7 @@ namespace eAgenda.WindowsApp.Features.Tarefas
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Tarefas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TelaTarefaForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.txtPercentual)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

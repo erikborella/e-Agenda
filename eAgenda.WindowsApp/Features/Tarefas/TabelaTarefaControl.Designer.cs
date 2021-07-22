@@ -29,32 +29,33 @@ namespace eAgenda.WindowsApp.Features.Tarefas
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.gridTarefas = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.gridTarefas)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // gridTarefas
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(89, 112);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Visualizando Tarefas";
+            this.gridTarefas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridTarefas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridTarefas.Location = new System.Drawing.Point(0, 0);
+            this.gridTarefas.Name = "gridTarefas";
+            this.gridTarefas.Size = new System.Drawing.Size(452, 386);
+            this.gridTarefas.TabIndex = 0;
             // 
             // TabelaTarefaControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.gridTarefas);
             this.Name = "TabelaTarefaControl";
-            this.Size = new System.Drawing.Size(307, 245);
+            this.Size = new System.Drawing.Size(452, 386);
+            ((System.ComponentModel.ISupportInitialize)(this.gridTarefas)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView gridTarefas;
     }
 }
