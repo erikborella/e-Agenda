@@ -38,11 +38,11 @@ namespace eAgenda.WindowsApp
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolboxAcoes = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAdicionar = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
@@ -76,7 +76,7 @@ namespace eAgenda.WindowsApp
             // 
             this.menuItemTarefas.Name = "menuItemTarefas";
             this.menuItemTarefas.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.menuItemTarefas.Size = new System.Drawing.Size(180, 22);
+            this.menuItemTarefas.Size = new System.Drawing.Size(173, 22);
             this.menuItemTarefas.Text = "Tarefas";
             this.menuItemTarefas.Click += new System.EventHandler(this.menuItemTarefas_Click);
             // 
@@ -84,7 +84,7 @@ namespace eAgenda.WindowsApp
             // 
             this.menuItemContato.Name = "menuItemContato";
             this.menuItemContato.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.menuItemContato.Size = new System.Drawing.Size(180, 22);
+            this.menuItemContato.Size = new System.Drawing.Size(173, 22);
             this.menuItemContato.Text = "Contatos";
             this.menuItemContato.Click += new System.EventHandler(this.menuItemContato_Click);
             // 
@@ -92,7 +92,7 @@ namespace eAgenda.WindowsApp
             // 
             this.menuItemCompromissos.Name = "menuItemCompromissos";
             this.menuItemCompromissos.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.menuItemCompromissos.Size = new System.Drawing.Size(180, 22);
+            this.menuItemCompromissos.Size = new System.Drawing.Size(173, 22);
             this.menuItemCompromissos.Text = "Compromissos";
             this.menuItemCompromissos.Click += new System.EventHandler(this.menuItemCompromissos_Click);
             // 
@@ -121,6 +121,11 @@ namespace eAgenda.WindowsApp
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 41);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 41);
             // 
             // labelTipoCadastro
             // 
@@ -154,15 +159,10 @@ namespace eAgenda.WindowsApp
             this.labelRodape.Size = new System.Drawing.Size(67, 17);
             this.labelRodape.Text = "Tudo Ok ;-)";
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 41);
-            // 
             // btnAdicionar
             // 
             this.btnAdicionar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAdicionar.Image = global::eAgenda.WindowsApp.Properties.Resources.Symbol_Add;
+            this.btnAdicionar.Image = global::eAgenda.WindowsApp.Properties.Resources.outline_add_circle_outline_black_24dp;
             this.btnAdicionar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdicionar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdicionar.Name = "btnAdicionar";
@@ -174,7 +174,7 @@ namespace eAgenda.WindowsApp
             // btnEditar
             // 
             this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEditar.Image = global::eAgenda.WindowsApp.Properties.Resources.Symbol_Pencil;
+            this.btnEditar.Image = global::eAgenda.WindowsApp.Properties.Resources.outline_mode_edit_black_24dp;
             this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
@@ -186,7 +186,7 @@ namespace eAgenda.WindowsApp
             // btnExcluir
             // 
             this.btnExcluir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnExcluir.Image = global::eAgenda.WindowsApp.Properties.Resources.Symbol_Delete;
+            this.btnExcluir.Image = global::eAgenda.WindowsApp.Properties.Resources.outline_delete_black_24dp;
             this.btnExcluir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExcluir.Name = "btnExcluir";
@@ -198,7 +198,7 @@ namespace eAgenda.WindowsApp
             // btnFiltrar
             // 
             this.btnFiltrar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFiltrar.Image = global::eAgenda.WindowsApp.Properties.Resources.Filter_Configuration;
+            this.btnFiltrar.Image = global::eAgenda.WindowsApp.Properties.Resources.outline_filter_alt_black_24dp;
             this.btnFiltrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnFiltrar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnFiltrar.Name = "btnFiltrar";

@@ -63,9 +63,9 @@ namespace eAgenda.WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Filter_Configuration {
+        internal static System.Drawing.Bitmap outline_add_circle_outline_black_24dp {
             get {
-                object obj = ResourceManager.GetObject("Filter_Configuration", resourceCulture);
+                object obj = ResourceManager.GetObject("outline_add_circle_outline_black_24dp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace eAgenda.WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Symbol_Add {
+        internal static System.Drawing.Bitmap outline_compress_black_24dp {
             get {
-                object obj = ResourceManager.GetObject("Symbol_Add", resourceCulture);
+                object obj = ResourceManager.GetObject("outline_compress_black_24dp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace eAgenda.WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Symbol_Delete {
+        internal static System.Drawing.Bitmap outline_delete_black_24dp {
             get {
-                object obj = ResourceManager.GetObject("Symbol_Delete", resourceCulture);
+                object obj = ResourceManager.GetObject("outline_delete_black_24dp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,59 @@ namespace eAgenda.WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Symbol_Pencil {
+        internal static System.Drawing.Bitmap outline_expand_black_24dp {
             get {
-                object obj = ResourceManager.GetObject("Symbol_Pencil", resourceCulture);
+                object obj = ResourceManager.GetObject("outline_expand_black_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap outline_filter_alt_black_24dp {
+            get {
+                object obj = ResourceManager.GetObject("outline_filter_alt_black_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap outline_list_alt_black_24dp {
+            get {
+                object obj = ResourceManager.GetObject("outline_list_alt_black_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap outline_mode_edit_black_24dp {
+            get {
+                object obj = ResourceManager.GetObject("outline_mode_edit_black_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap outline_table_rows_black_24dp {
+            get {
+                object obj = ResourceManager.GetObject("outline_table_rows_black_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap outline_view_list_black_24dp {
+            get {
+                object obj = ResourceManager.GetObject("outline_view_list_black_24dp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
